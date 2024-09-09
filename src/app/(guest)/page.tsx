@@ -2,25 +2,10 @@ import CategoryCard from "@/components/card/CategoryCard";
 import ProductCard from "@/components/card/ProductCard";
 import TopBanner from "@/components/TopBanner";
 import Wrapper from "@/components/Wrapper";
-import { API_URL, STRAPI_API_TOKEN } from "@/utils/urls";
-
-async function getProducts() {
-  const res = await fetch(`${API_URL}/api/products?populate=*`, {
-    headers: {
-      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
-  }
-
-  const data = await res.json();
-  return data;
-}
+import { fetchDataFromApi } from "@/utils/api";
 
 export default async function Home() {
-  const products = await getProducts();
+  const products = await fetchDataFromApi("/api/products?populate=*");
 
   return (
     <main>
