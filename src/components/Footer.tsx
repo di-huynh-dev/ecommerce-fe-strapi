@@ -1,5 +1,4 @@
 import React from "react";
-import { FiZap } from "react-icons/fi";
 
 type MenuItemsType = {
   title: string;

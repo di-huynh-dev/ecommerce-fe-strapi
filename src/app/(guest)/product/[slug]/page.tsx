@@ -14,7 +14,6 @@ const ProductDetailPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <>
-      {" "}
       <ClientProductDetail product={product} />
     </>
   );

@@ -24,6 +24,7 @@ const ProductImagesCarousel = ({ images }: { images: string[] }) => {
                 border: selectedImageIndex === index ? "2px solid #1890ff" : "",
                 borderRadius: "4px",
               }}
+              alt="Product Image Thumbnail"
               onClick={() => handleThumbnailClick(index)}
             />
           ))}

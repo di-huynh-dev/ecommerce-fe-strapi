@@ -1,7 +1,5 @@
 "use client";
 
-import Wrapper from "@/components/Wrapper";
-import { getDiscountedPricePercentage } from "@/utils/heloer";
 import React, { useState } from "react";
 import {
   Row,
@@ -14,11 +12,10 @@ import {
   InputNumber,
 } from "antd";
 import Markdown from "react-markdown";
-import ProductImagesCarousel from "@/components/ProductImagesCarousel";
+import ProductImagesCarousel from "@/components/product/ProductImagesCarousel";
 import { BiHeartCircle } from "react-icons/bi";
-import { useDispatch } from "react-redux";
-import { addToCart } from "@/lib/features/cart/cartSlice";
-
+import Wrapper from "../Wrapper";
+import { getDiscountedPricePercentage } from "@/utils/helpers";
 const { Title, Text } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -27,7 +24,6 @@ const ClientProductDetail = ({ product }: { product: any }) => {
   const [showError, setShowError] = useState(false);
   const [numberOfItems, setNumberOfItems] = useState(1);
   const screens = useBreakpoint();
-  const dispatch = useDispatch(); // Khai báo useDispatch
 
   const p = product;
 
@@ -35,30 +31,6 @@ const ClientProductDetail = ({ product }: { product: any }) => {
     setSelectedSize(size);
     setShowError(false);
     message.success(`Selected size: ${size}`);
-  };
-
-  // Hàm xử lý khi nhấn "Add to Cart"
-  const handleAddToCart = () => {
-    if (!selectedSize) {
-      setShowError(true);
-      return;
-    }
-
-    const item = {
-      id: p.id,
-      name: p.name,
-      price: p.price,
-      oneQuantityPrice: p.price,
-      quantity: numberOfItems,
-      attributes: {
-        price: p.price * numberOfItems,
-      },
-      size: selectedSize,
-    };
-
-    // Dispatch action addToCart với sản phẩm đã chọn
-    dispatch(addToCart(item));
-    message.success("Added to cart!");
   };
 
   return (
@@ -73,15 +45,11 @@ const ClientProductDetail = ({ product }: { product: any }) => {
 
           <Col xs={24} lg={12}>
             <div className="py-3">
-              {/* PRODUCT SUBTITLE */}
               <Text type="secondary">{p.subtitle}</Text>
-
-              {/* PRODUCT TITLE */}
+              <p>ID: {p.id}</p>
               <Title level={2} className="my-2">
                 {p.name}
               </Title>
-
-              {/* PRODUCT PRICE */}
               <div className="flex items-center mb-4">
                 <Title level={3} type="danger" className="mr-2">
                   ${p.price}
@@ -97,7 +65,6 @@ const ClientProductDetail = ({ product }: { product: any }) => {
                 )}
               </div>
 
-              {/* PRODUCT SIZE SELECTION */}
               <div className="mb-5">
                 <div className="flex justify-between mb-2">
                   <Text strong>Select Size</Text>
@@ -105,7 +72,6 @@ const ClientProductDetail = ({ product }: { product: any }) => {
                     Size Guide
                   </Text>
                 </div>
-
                 <Row gutter={16}>
                   {p.size.data.map((item: any, i: any) => (
                     <Col span={8} key={i}>
@@ -122,7 +88,6 @@ const ClientProductDetail = ({ product }: { product: any }) => {
                     </Col>
                   ))}
                 </Row>
-
                 {showError && (
                   <Text type="danger" className="mt-2">
                     Size selection is required
@@ -130,7 +95,6 @@ const ClientProductDetail = ({ product }: { product: any }) => {
                 )}
               </div>
 
-              {/* PRODUCT QUANTITY SELECTION */}
               <div className="mb-5">
                 <div className="flex justify-between mb-2">
                   <Text strong>Quantity</Text>
@@ -148,10 +112,9 @@ const ClientProductDetail = ({ product }: { product: any }) => {
                 </Row>
               </div>
 
-              {/* ADD TO CART AND WISHLIST */}
               <Row gutter={16} className="mt-5">
                 <Col span={12}>
-                  <Button block type="primary" onClick={handleAddToCart}>
+                  <Button block type="primary">
                     Add to Cart
                   </Button>
                 </Col>
@@ -163,7 +126,6 @@ const ClientProductDetail = ({ product }: { product: any }) => {
                 </Col>
               </Row>
 
-              {/* PRODUCT DESCRIPTION */}
               <div className="mt-10">
                 <Title level={4}>Description</Title>
                 <Markdown>{p.description}</Markdown>
