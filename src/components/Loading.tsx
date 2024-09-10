@@ -10,24 +10,15 @@ const contentStyle: React.CSSProperties = {
 const content = <div style={contentStyle} />;
 
 const Loading: React.FC = () => (
-  <Flex gap="middle" vertical>
-    <Flex gap="middle">
-      <Spin tip="Loading" size="small">
-        {content}
-      </Spin>
-      <Spin tip="Loading">{content}</Spin>
-      <Spin tip="Loading" size="large">
-        {content}
-      </Spin>
+  <div className="flex items-center justify-center">
+    <Flex gap="middle" vertical>
+      <Flex gap="middle">
+        <Spin tip="Loading" size="large">
+          {content}
+        </Spin>
+      </Flex>
     </Flex>
-    <Spin tip="Loading...">
-      <Alert
-        message="Alert message title"
-        description="Further details about the context of this alert."
-        type="info"
-      />
-    </Spin>
-  </Flex>
+  </div>
 );
 
 export default Loading;

@@ -4,6 +4,7 @@ import { Card, Carousel } from "antd";
 import { fetchDataFromApi } from "@/utils/api";
 import Image from "next/image";
 import Link from "next/link";
+import Loading from "../Loading";
 
 const contentStyle: React.CSSProperties = {
   height: "560px",
@@ -20,7 +21,7 @@ const CategoryCardCarousel = () => {
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        const data = await fetchDataFromApi(`/api/categories?populate=*`);
+        const data = await fetchDataFromApi(`api/categories?populate=*`);
         setCategories(data.data || []);
       } catch (err) {
         setError("Failed to load categories");
@@ -45,7 +46,7 @@ const CategoryCardCarousel = () => {
   return (
     <div className="my-10">
       {loading ? (
-        <p>Loading...</p>
+        <Loading />
       ) : error ? (
         <p>{error}</p>
       ) : (

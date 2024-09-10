@@ -20,7 +20,7 @@ const CategoryDetail = ({ categoryData }: { categoryData: any }) => {
         sortQuery = `&sort=${sortOrder}`;
       }
       const response = await fetchDataFromApi(
-        `/api/products?populate=*&filters[categories][slug][$eq]=${categoryData.slug}&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}${sortQuery}`
+        `api/products?populate=*&filters[categories][slug][$eq]=${categoryData.slug}&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}${sortQuery}`
       );
       setProductData(response);
     };

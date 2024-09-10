@@ -5,7 +5,7 @@ import Wrapper from "@/components/Wrapper";
 import { fetchDataFromApi } from "@/utils/api";
 
 export default async function Home() {
-  const products = await fetchDataFromApi("/api/products?populate=*");
+  const products = await fetchDataFromApi("api/products?populate=*");
 
   return (
     <main>
