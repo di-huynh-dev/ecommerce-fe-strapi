@@ -24,9 +24,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <Image
               src={thumbnailUrl}
               alt={name}
-              layout="fill"
-              objectFit="cover" // This ensures the image covers the div
-              className="aspect-square" // To ensure the images are square-shaped
+              fill // This makes the image fill the parent div
+              style={{ objectFit: "cover" }} // Use style prop to handle objectFit
+              className="aspect-square"
             />
           </div>
         }
