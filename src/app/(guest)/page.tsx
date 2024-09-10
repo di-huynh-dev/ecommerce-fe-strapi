@@ -19,11 +19,15 @@ export default async function Home() {
 
           {/* Top Products */}
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
-              {products?.data.map((product: Product) => (
-                <ProductCard key={product?.id} product={product} />
-              ))}
-            </div>
+            {products?.data?.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
+                {products.data.map((product: Product) => (
+                  <ProductCard key={product?.id} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div>No products available</div> // Hiển thị thông báo khi không có sản phẩm
+            )}
             <div className="text-center">
               <button className="bg-red-500 text-white px-4 py-2 rounded-md">
                 View all products

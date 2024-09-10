@@ -50,10 +50,10 @@ const CategoryCardCarousel = () => {
         <p>{error}</p>
       ) : (
         <Carousel autoplay>
-          {groupedCategories.map((group, index) => (
+          {groupedCategories?.map((group, index) => (
             <div key={index} style={contentStyle}>
               <div className="grid grid-cols-5 gap-4">
-                {group.map((category, idx) => (
+                {group?.map((category, idx) => (
                   <>
                     <Link href={`/category/${category.attributes.slug}`}>
                       <Card
